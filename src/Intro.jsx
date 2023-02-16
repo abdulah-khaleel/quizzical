@@ -6,7 +6,7 @@ export default function Intro(props) {
     <div className="intro--container">
       <h1 className="intro--title">Quizzical</h1>
       <p className="intro--greeting-text">Some description if needed</p>
-      <button onClick={props.handleClick} className="btn btn--start-quiz">
+      <button onClick={props.handleClick} className="btn btn--intro">
         Start Quiz
       </button>
     </div>
