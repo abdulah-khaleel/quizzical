@@ -62,7 +62,7 @@
 }
 
 .btn--verify {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   width: 120px;
   height: 35px;
   background: #4d5b9e;
@@ -102,4 +102,8 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.button-dim {
+  opacity: 50%;
 }

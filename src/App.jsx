@@ -14,10 +14,13 @@ function App() {
   const [gameCount, setGameCount] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [allAnswered, setAllAnswered] = useState(false);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+
+  const quizSize = 3;
 
   React.useEffect(() => {
     fetch(
-      "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
+      `https://opentdb.com/api.php?amount=${quizSize}&category=9&difficulty=easy&type=multiple`
     )
       .then((res) => res.json())
       .then((data) => setRawQuestionsArray(data.results));
@@ -25,22 +28,30 @@ function App() {
   }, [gameCount]);
 
   React.useEffect(() => {
-    console.log("checking how many questions were answered !!");
     let answeredQuestionsCount = 0;
     for (const question of newQuestions) {
       for (const answer of question.answersArray) {
         if (answer.isHeld) {
           answeredQuestionsCount += 1;
-        } else {
-          console.log("not held");
         }
       }
     }
 
-    if (answeredQuestionsCount === 5) {
+    if (answeredQuestionsCount === quizSize) {
       setAllAnswered(true);
     }
   }, [newQuestions]);
+
+  function countCorrectAnswers() {
+    setCorrectAnswersCount((oldVal) => 0);
+    for (const question of newQuestions) {
+      for (const answer of question.answersArray) {
+        if (answer.isHeld && answer.isCorrect) {
+          setCorrectAnswersCount((oldVal) => oldVal + 1);
+        }
+      }
+    }
+  }
 
   function prepareQuestions() {
     const formattedQuestions = [];
@@ -50,8 +61,6 @@ function App() {
       const questionId = nanoid();
       shuffledAnswers.splice(index, 0, question.correct_answer);
 
-      // generate an array of answer objects - each with its held
-      //  status and heldCorrect and heldIncorrect
       const answersArray = shuffledAnswers.map((answer) => ({
         questionId: questionId,
         answerId: nanoid(),
@@ -72,7 +81,6 @@ function App() {
         correctAnswerIndex: index,
       });
     }
-    console.log(formattedQuestions);
     setNewQuestions(formattedQuestions);
   }
 
@@ -84,6 +92,7 @@ function App() {
   function generateNewQuestion() {
     setGameCount((oldCount) => oldCount + 1);
     setAnswered(false);
+    setAllAnswered(false);
   }
 
   function checkAnswers() {
@@ -106,6 +115,7 @@ function App() {
       }
       setNewQuestions(newQuestionsArray);
       setAnswered(true);
+      countCorrectAnswers();
     }
   }
 
@@ -145,14 +155,38 @@ function App() {
         {quizStarted ? (
           <div className="main">
             {questionsElements}
-            <button className="btn--verify " onClick={generateNewQuestion}>
-              New Questions
-            </button>
-            {!answered && (
-              <button className="btn--verify " onClick={checkAnswers}>
-                {allAnswered ? "Check Answers" : "Attempt All Questions"}
-              </button>
-            )}
+            <div className="buttons-container">
+              {answered ? (
+                <p className="result-summary">
+                  {`You scored `}
+                  <span className="result-score">
+                    {`${correctAnswersCount}`}/
+                  </span>
+                  {`${quizSize} correct answers`}
+                </p>
+              ) : (
+                ""
+              )}
+              {answered ? (
+                <button className="btn--verify " onClick={generateNewQuestion}>
+                  Play Again
+                </button>
+              ) : (
+                ""
+              )}
+              {!answered && (
+                <button className="btn--verify " onClick={checkAnswers}>
+                  {allAnswered
+                    ? "Check Answers"
+                    : `Attempt All ${quizSize} Questions`}
+                </button>
+              )}
+            </div>
+            <div className="credits">
+              Project App -{" "}
+              <a href="https://scrimba.com/learn/learnreact">Learn React</a> by
+              Bob Ziroll
+            </div>
           </div>
         ) : (
           <Intro handleClick={handleClick} />

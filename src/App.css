@@ -24,6 +24,8 @@ body {
 .app-container {
   /* position: absolute;  */
   position: relative;
+  background-image: url(./assets/white_wall_hash.webp);
+  z-index: 0;
   margin: 0 auto;
   margin-top: 10vh;
   max-width: 650px;
@@ -54,4 +56,37 @@ body {
   top: 100%;
   left: 0;
   transform: translate(-50%, -30%);
+}
+
+.buttons-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid black; */
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.result-summary {
+  /* align-self: center; */
+  margin-right: 20px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12.8px;
+  line-height: 15px;
+}
+
+.result-score {
+  color: green;
+}
+
+.credits {
+  margin-left: -30px;
+  font-size: 0.6rem;
+}
+
+button {
+  cursor: pointer;
 }

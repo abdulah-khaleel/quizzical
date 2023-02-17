@@ -27,7 +27,7 @@ export default function Question(props) {
       answeredCorrectly={answer.answeredCorrectly}
       answeredIncorrectly={answer.answeredIncorrectly}
       highlightAsCorrect={answer.highlightAsCorrect}
-      // holdAnswer={() => holdAnswer(answer.answerId)}
+      isCorrect={answer.isCorrect}
       holdAnswer={props.holdAnswer}
       answered={props.answered}
     />
@@ -40,7 +40,6 @@ export default function Question(props) {
         dangerouslySetInnerHTML={{ __html: props.question }}
       ></p>
 
-      {/* <div className="answers">{answersElements}</div> */}
       <div className="answers">{newAnswersElements}</div>
     </div>
   );
