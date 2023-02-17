@@ -15,19 +15,6 @@ export default function Answer(props) {
     }
   };
 
-  // const doNotDimAnswer = function () {
-  //   if (props.answered) {
-  //     if (props.isHeld && props.isCorrect) {
-  //       return true;
-  //     } else if (props.highlightAsCorrect) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } else {
-  //     return true;
-  //   }
-  // };
   return (
     <div
       className={`answer 
@@ -35,7 +22,7 @@ export default function Answer(props) {
     ${props.answeredCorrectly ? "answer-selected-correct" : ""} 
     ${props.answeredIncorrectly ? "answer-selected-incorrect" : ""} 
     ${props.highlightAsCorrect ? "highlightAsCorrect" : ""} 
-    ${!props.answered ? "clickable" : ""} 
+    ${props.answered ? "" : "clickable"} 
     ${dimAnswer() ? "button-dim" : ""} 
     `}
       dangerouslySetInnerHTML={{ __html: props.answerBody }}

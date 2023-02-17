@@ -16,7 +16,7 @@ function App() {
   const [allAnswered, setAllAnswered] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
-  const quizSize = 3;
+  const quizSize = 5;
 
   React.useEffect(() => {
     fetch(

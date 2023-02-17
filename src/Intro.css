@@ -46,9 +46,15 @@
   height: 52px;
   left: 179px;
   top: 314px;
+  margin-bottom: 2rem;
 
   background: #4d5b9e;
   border-radius: 15px;
+}
+
+.credit-trivia {
+  font-size: 0.6rem;
+  opacity: 80%;
 }
 
 /* // LAYOUT */

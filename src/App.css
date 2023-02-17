@@ -27,7 +27,7 @@ body {
   background-image: url(./assets/white_wall_hash.webp);
   z-index: 0;
   margin: 0 auto;
-  margin-top: 10vh;
+  margin-top: 5vh;
   max-width: 650px;
   border: 1px solid var(--accent-dark);
   padding: 1rem;

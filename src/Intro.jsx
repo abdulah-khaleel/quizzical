@@ -11,6 +11,10 @@ export default function Intro(props) {
       <button onClick={props.handleClick} className="btn btn--intro">
         Start Quiz
       </button>
+      <p className="credit-trivia">
+        Questions from the{" "}
+        <a href="https://opentdb.com/">Open Trivia Database </a> API
+      </p>
     </div>
   );
 }
