@@ -77,8 +77,6 @@ function App() {
         body: question.question,
         answers: shuffledAnswers,
         answersArray: answersArray,
-        correctAnswer: question.correct_answer,
-        correctAnswerIndex: index,
       });
     }
     setNewQuestions(formattedQuestions);
@@ -141,9 +139,7 @@ function App() {
   const questionsElements = newQuestions.map((questionObj) => (
     <Question
       key={questionObj.questionId}
-      question={questionObj.body}
-      answers={questionObj.answers}
-      answersArray={questionObj.answersArray}
+      question={questionObj}
       holdAnswer={holdAnswer}
       answered={answered}
     />
